@@ -123,13 +123,14 @@ class AnnotationUI:
                         )
                     with gr.Column(scale=1):
                         object_dd = gr.Dropdown(
-                            choices=[o.name for o in self.registry.list_objects()],
-                            label="🎯 选择研究对象", value="医疗实体识别"
+                            choices=self._object_names_for_industry("医疗健康"),
+                            label="🎯 选择研究对象", value="医疗实体识别",
+                            info="选项随所选行业联动刷新"
                         )
                 object_info = gr.Markdown(self._show_object_info("医疗健康", "医疗实体识别"))
                 industry_dd.change(
-                    lambda ind: self._show_object_info(ind, object_dd.value),
-                    inputs=[industry_dd], outputs=[object_info]
+                    self._on_industry_change,
+                    inputs=[industry_dd], outputs=[object_dd, object_info]
                 )
                 object_dd.change(
                     lambda obj: self._show_object_info(industry_dd.value, obj),
@@ -421,6 +422,20 @@ class AnnotationUI:
         return demo
 
     # ============ 辅助方法 ============
+
+    def _object_names_for_industry(self, industry_name: str) -> List[str]:
+        """某个行业下可选的研究对象名称（行业→对象联动用）"""
+        industry = next((i for i in self.registry.list_industries() if i.name == industry_name), None)
+        if industry is None:
+            # 行业名对不上时退回全量，避免下拉框变空
+            return [o.name for o in self.registry.list_objects()]
+        return [o.name for o in self.registry.list_objects_by_industry(industry.id)]
+
+    def _on_industry_change(self, industry_name: str):
+        """切换行业：联动刷新研究对象选项，并同步下方说明文字"""
+        names = self._object_names_for_industry(industry_name)
+        first = names[0] if names else None
+        return gr.update(choices=names, value=first), self._show_object_info(industry_name, first or "")
 
     def _show_object_info(self, industry_name: str, object_name: str) -> str:
         industry = next((i for i in self.registry.list_industries() if i.name == industry_name), None)
