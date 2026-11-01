@@ -3,11 +3,11 @@
 支持可解释性输出(标注理由)、置信度、难度分级
 """
 from typing import List, Dict, Any, Optional
-from core.models import (
+from data_annotation_agent.core.models import (
     AnnotationResult, AnnotationGuideline, GoldSet, AnnotatorPreset,
     DataType, TaskType
 )
-from llm.backend import LLMBackend
+from data_annotation_agent.llm.backend import LLMBackend
 
 
 class AnnotatorAgent:

@@ -1,0 +1,25 @@
+# 默认按文本处理，统一 LF 换行（Windows 检出时由 Git 按需转换）
+* text=auto eol=lf
+
+# 源码
+*.py    text eol=lf
+*.toml  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.cfg   text eol=lf
+
+# 二进制
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.xlsx  binary
+*.zip   binary
+
+# 导出产物不参与 diff 统计
+*.csv   text eol=lf
+*.jsonl text eol=lf

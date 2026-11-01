@@ -10,13 +10,13 @@ from .models import (
     InspectorPreset, AdjudicatorPreset, ReviewerPreset, MonitorPreset,
     GoldSet, GoldSample, Industry, ResearchObject
 )
-from llm.backend import LLMBackend, get_backend, LLMFactory, MockBackend
-from agents.annotator import AnnotatorAgent
-from agents.inspector import InspectorAgent
-from agents.adjudicator import AdjudicatorAgent
-from agents.reviewer import ReviewerAgent
-from agents.guideline_agent import GuidelineAgent
-from quality.monitor import MonitorAgent, CostEstimator
+from data_annotation_agent.llm.backend import LLMBackend, get_backend, LLMFactory, MockBackend
+from data_annotation_agent.agents.annotator import AnnotatorAgent
+from data_annotation_agent.agents.inspector import InspectorAgent
+from data_annotation_agent.agents.adjudicator import AdjudicatorAgent
+from data_annotation_agent.agents.reviewer import ReviewerAgent
+from data_annotation_agent.agents.guideline_agent import GuidelineAgent
+from data_annotation_agent.quality.monitor import MonitorAgent, CostEstimator
 
 
 class AnnotationPipeline:

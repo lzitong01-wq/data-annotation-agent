@@ -1,7 +1,13 @@
-# 数据标注智能体 依赖
-# 界面运行必需
-gradio>=6.0
+# 运行依赖（权威定义见 pyproject.toml，此处保留以便快速安装）
+#
+#   pip install -r requirements.txt     # 仅运行依赖
+#   pip install -e ".[dev]"            # 可编辑安装 + 开发依赖（推荐）
+
+# 数据模型
 pydantic>=2.0
+
+# Web 界面
+gradio>=6.0
 
 # 真实 LLM 后端(DeepSeek/通义/OpenAI 等 OpenAI 兼容 API);纯 mock 模式可不装
 openai>=1.0

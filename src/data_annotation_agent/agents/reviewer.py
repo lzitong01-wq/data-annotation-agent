@@ -3,7 +3,7 @@
 自动标记疑难样本,提供人工复核
 """
 from typing import List, Dict, Any, Optional
-from core.models import AnnotationResult, ReviewerPreset
+from data_annotation_agent.core.models import AnnotationResult, ReviewerPreset
 
 
 class ReviewerAgent:

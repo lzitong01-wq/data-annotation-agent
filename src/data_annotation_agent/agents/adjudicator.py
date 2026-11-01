@@ -4,7 +4,7 @@
 """
 from typing import List, Dict, Any, Optional
 from collections import Counter
-from core.models import AnnotationResult, AdjudicatorPreset
+from data_annotation_agent.core.models import AnnotationResult, AdjudicatorPreset
 
 
 class AdjudicatorAgent:

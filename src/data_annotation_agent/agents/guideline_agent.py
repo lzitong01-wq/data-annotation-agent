@@ -5,8 +5,8 @@
 """
 from typing import List, Dict, Any, Optional
 from datetime import datetime
-from core.models import AnnotationGuideline, ResearchObject, Industry
-from llm.backend import LLMBackend
+from data_annotation_agent.core.models import AnnotationGuideline, ResearchObject, Industry
+from data_annotation_agent.llm.backend import LLMBackend
 
 
 class GuidelineAgent:
@@ -84,7 +84,7 @@ class GuidelineAgent:
         try:
             result = self.backend.complete_json(system_prompt, user_prompt)
             # 更新指南
-            updated = guideline.copy()
+            updated = guideline.model_copy()
             updated.rules = guideline.rules + result.get("new_rules", [])
             updated.boundary_cases = guideline.boundary_cases + result.get("new_boundary_cases", [])
             updated.source = "optimized"

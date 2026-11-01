@@ -3,8 +3,8 @@
 量化标注者间一致性,暴露分歧样本
 """
 from typing import List, Dict, Any, Optional
-from core.models import AnnotationResult, InspectorPreset
-from quality.agreement import compute_agreement, cohens_kappa, fleiss_kappa
+from data_annotation_agent.core.models import AnnotationResult, InspectorPreset
+from data_annotation_agent.quality.agreement import compute_agreement, cohens_kappa, fleiss_kappa
 
 
 class InspectorAgent:

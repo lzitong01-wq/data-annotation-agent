@@ -3,18 +3,19 @@ Web 界面(Gradio)
 美观、结构井然、通用
 流程:① 选行业对象 → ② 配 LLM 与方案 → ③ 输入数据 → ④ 标注 → ⑤ 检验/复核/反馈
 支持运行时配置真实 LLM(DeepSeek/通义/OpenAI/自定义),无需改代码
+启动:python -m data_annotation_agent  或  data-annotation-agent
 """
 import gradio as gr
 from typing import List, Dict, Any, Optional
-from core.models import (
+from data_annotation_agent.core.models import (
     Registry, GoldenData, GoldSet, GoldSample, AnnotationGuideline,
     AgentPresets, AnnotatorPreset, InspectorPreset, AdjudicatorPreset,
     ReviewerPreset, MonitorPreset
 )
-from core.pipeline import AnnotationPipeline
-from core.exporter import export_results, EXPORTERS
-from llm.backend import get_backend, PROVIDER_PRESETS
-from quality.monitor import CostEstimator
+from data_annotation_agent.core.pipeline import AnnotationPipeline
+from data_annotation_agent.core.exporter import export_results, EXPORTERS
+from data_annotation_agent.llm.backend import get_backend, PROVIDER_PRESETS
+from data_annotation_agent.quality.monitor import CostEstimator
 from datetime import datetime
 import os
 
@@ -746,12 +747,35 @@ class AnnotationUI:
         return f"**导出成功:** 已导出 {len(self.pipeline.results)} 条结果为 `{fmt}` 格式 → `{path}`"
 
 
-def launch(port: int = 7860):
-    """启动 Web 界面"""
+def launch(host: str = "127.0.0.1", port: int = 7860, share: bool = False):
+    """启动 Web 界面
+
+    默认只监听回环地址：界面没有鉴权，不应直接暴露到公网。
+    需要局域网访问时显式传 ``host="0.0.0.0"``。
+    """
     ui = AnnotationUI()
     demo = ui.build()
-    demo.launch(server_name="0.0.0.0", server_port=port, share=False, css=CUSTOM_CSS)
+    demo.launch(server_name=host, server_port=port, share=share, css=CUSTOM_CSS)
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    """命令行入口：``data-annotation-agent [--host HOST] [--port PORT] [--share]``"""
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        prog="data-annotation-agent",
+        description="数据标注智能体 —— Gradio 七步式标注界面",
+    )
+    parser.add_argument("--host", default="127.0.0.1",
+                        help="监听地址（默认 127.0.0.1；局域网访问用 0.0.0.0）")
+    parser.add_argument("--port", type=int, default=7860, help="监听端口（默认 7860）")
+    parser.add_argument("--share", action="store_true", help="生成 Gradio 公网临时链接")
+    args = parser.parse_args(argv)
+
+    launch(host=args.host, port=args.port, share=args.share)
+    return 0
 
 
 if __name__ == "__main__":
-    launch()
+    raise SystemExit(main())
+

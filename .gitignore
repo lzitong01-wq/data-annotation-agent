@@ -9,6 +9,7 @@ dist/
 *.egg-info/
 .eggs/
 pip-wheel-metadata/
+MANIFEST
 
 # ---- 虚拟环境 ----
 .venv/
@@ -21,21 +22,23 @@ ENV/
 .mypy_cache/
 .ruff_cache/
 .coverage
+.coverage.*
 htmlcov/
+coverage.xml
 
 # ---- Gradio ----
 .gradio/
 flagged/
 
-# ---- 导出产物(标注结果不入库) ----
+# ---- 导出产物（标注结果不入库）----
 outputs/
 exports/
 *.csv
 *.jsonl
-!测试数据/**/*.csv
-!测试数据/**/*.jsonl
+!data/**/*.csv
+!data/**/*.jsonl
 
-# ---- 本地配置与密钥(切勿提交) ----
+# ---- 本地配置与密钥（切勿提交）----
 .env
 .env.*
 *.key
@@ -50,5 +53,5 @@ config.local.*
 Thumbs.db
 desktop.ini
 
-# ---- 压缩包(源码请直接提交,不要提交打包产物) ----
+# ---- 压缩包（源码请直接提交，不要提交打包产物）----
 *.zip

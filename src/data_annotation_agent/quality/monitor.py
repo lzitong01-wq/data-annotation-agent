@@ -4,7 +4,7 @@
 提供预设(保守/平衡/宽松/手动)
 """
 from typing import List, Dict, Any, Optional
-from core.models import MonitorPreset
+from data_annotation_agent.core.models import MonitorPreset
 
 
 class MonitorAgent:
