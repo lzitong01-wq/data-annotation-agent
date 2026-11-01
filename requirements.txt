@@ -1,0 +1,10 @@
+# 数据标注智能体 依赖
+# 界面运行必需
+gradio>=6.0
+pydantic>=2.0
+
+# 真实 LLM 后端(DeepSeek/通义/OpenAI 等 OpenAI 兼容 API);纯 mock 模式可不装
+openai>=1.0
+
+# Excel 导出可选;不导出 xlsx 可不装
+openpyxl>=3.1
