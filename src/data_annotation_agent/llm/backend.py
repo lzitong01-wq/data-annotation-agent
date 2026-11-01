@@ -5,11 +5,10 @@ LLM 后端抽象层
 - 多后端实例:多 AI 互检时每个模型一个独立后端
 - 连接测试:正式标注前先验证 Key 是否可用
 """
-import os
 import json
-from typing import List, Dict, Any, Optional
+import os
 from abc import ABC, abstractmethod
-
+from typing import Any, Dict, List
 
 # ============ 厂商预设(市面常见 OpenAI 兼容服务) ============
 

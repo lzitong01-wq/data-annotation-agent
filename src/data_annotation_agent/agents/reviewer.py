@@ -2,7 +2,8 @@
 复核 Agent:人工复核接口
 自动标记疑难样本,提供人工复核
 """
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List
+
 from data_annotation_agent.core.models import AnnotationResult, ReviewerPreset
 
 

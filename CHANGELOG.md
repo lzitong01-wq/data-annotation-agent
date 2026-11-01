@@ -39,7 +39,8 @@
 - 采用 `src/` 布局，模块收拢为单一可安装包 `data_annotation_agent`
 - 新增 `pyproject.toml`，支持 `pip install -e .`，提供 `data-annotation-agent` 控制台入口与 `python -m data_annotation_agent` 模块入口
 - 测试改造为 pytest 可收集的真实断言，覆盖 12 个文件、130 项用例；原脚本式 `check()` 只计数不断言，pytest 下会假通过
-- 新增 GitHub Actions CI（Python 3.10 / 3.11 / 3.12）
+- 新增 GitHub Actions CI（Python 3.10 / 3.11 / 3.12），含静态检查与示例冒烟
+- 代码通过 `ruff check`（E / F / W / I 规则）：清理 25 处未用导入、15 处导入顺序、3 处未用变量、2 处歧义变量名
 - 新增 `docs/`（架构、扩展、一致性指标）与 `examples/`（四个可运行示例）
 - 界面默认监听地址由 `0.0.0.0` 改为 `127.0.0.1`：界面无鉴权，不应默认暴露到局域网
 

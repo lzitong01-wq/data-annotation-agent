@@ -2,9 +2,10 @@
 裁决 Agent:多数投票 / 加权聚合 / 人工裁决
 用于聚合多个标注者的结果,解决分歧
 """
-from typing import List, Dict, Any, Optional
 from collections import Counter
-from data_annotation_agent.core.models import AnnotationResult, AdjudicatorPreset
+from typing import Any, Dict, List, Optional
+
+from data_annotation_agent.core.models import AdjudicatorPreset, AnnotationResult
 
 
 class AdjudicatorAgent:

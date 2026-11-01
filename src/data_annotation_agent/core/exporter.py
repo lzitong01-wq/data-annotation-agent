@@ -5,8 +5,8 @@
 """
 import csv
 import json
-import os
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List
+
 from .models import AnnotationResult
 
 

@@ -2,21 +2,17 @@
 主流程编排器
 把整个流程串起来:选行业→选对象→选AI→选指南→选预设→标注→检验→复核→反馈闭环
 """
-import os
-from typing import List, Dict, Any, Optional
-from .models import (
-    Registry, GoldenData, AnnotationGuideline, AgentPresets,
-    AnnotationConfig, AnnotationResult, AnnotatorPreset,
-    InspectorPreset, AdjudicatorPreset, ReviewerPreset, MonitorPreset,
-    GoldSet, GoldSample, Industry, ResearchObject
-)
-from data_annotation_agent.llm.backend import LLMBackend, get_backend, LLMFactory, MockBackend
-from data_annotation_agent.agents.annotator import AnnotatorAgent
-from data_annotation_agent.agents.inspector import InspectorAgent
+from typing import Any, Dict, List, Optional
+
 from data_annotation_agent.agents.adjudicator import AdjudicatorAgent
-from data_annotation_agent.agents.reviewer import ReviewerAgent
+from data_annotation_agent.agents.annotator import AnnotatorAgent
 from data_annotation_agent.agents.guideline_agent import GuidelineAgent
-from data_annotation_agent.quality.monitor import MonitorAgent, CostEstimator
+from data_annotation_agent.agents.inspector import InspectorAgent
+from data_annotation_agent.agents.reviewer import ReviewerAgent
+from data_annotation_agent.llm.backend import LLMBackend, MockBackend, get_backend
+from data_annotation_agent.quality.monitor import CostEstimator, MonitorAgent
+
+from .models import AgentPresets, AnnotationConfig, AnnotationGuideline, AnnotationResult, GoldenData, Registry
 
 
 class AnnotationPipeline:
@@ -286,7 +282,7 @@ class AnnotationPipeline:
         标注 → 检验 → 裁决 → 复核 → 反馈闭环
         """
         # 1. 标注
-        results = self.annotate_samples(samples)
+        self.annotate_samples(samples)
 
         # 2. 检验(一致性 + AI 互检)
         inspection = self.inspect_results()

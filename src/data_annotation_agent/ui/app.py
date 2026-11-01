@@ -5,20 +5,28 @@ Web 界面(Gradio)
 支持运行时配置真实 LLM(DeepSeek/通义/OpenAI/自定义),无需改代码
 启动:python -m data_annotation_agent  或  data-annotation-agent
 """
+import os
+from typing import Any, Dict, List, Optional
+
 import gradio as gr
-from typing import List, Dict, Any, Optional
+
+from data_annotation_agent.core.exporter import EXPORTERS, export_results
 from data_annotation_agent.core.models import (
-    Registry, GoldenData, GoldSet, GoldSample, AnnotationGuideline,
-    AgentPresets, AnnotatorPreset, InspectorPreset, AdjudicatorPreset,
-    ReviewerPreset, MonitorPreset
+    AdjudicatorPreset,
+    AgentPresets,
+    AnnotationGuideline,
+    AnnotatorPreset,
+    GoldenData,
+    GoldSample,
+    GoldSet,
+    InspectorPreset,
+    MonitorPreset,
+    Registry,
+    ReviewerPreset,
 )
 from data_annotation_agent.core.pipeline import AnnotationPipeline
-from data_annotation_agent.core.exporter import export_results, EXPORTERS
-from data_annotation_agent.llm.backend import get_backend, PROVIDER_PRESETS
+from data_annotation_agent.llm.backend import PROVIDER_PRESETS
 from data_annotation_agent.quality.monitor import CostEstimator
-from datetime import datetime
-import os
-
 
 # 界面配色(统一、清晰)
 PRIMARY = "#2563eb"
@@ -150,7 +158,7 @@ class AnnotationUI:
                     )
                 with gr.Row():
                     models_tb = gr.Textbox(
-                        label="参与标注的模型(逗号分隔,多模型=多AI互检)",
+                        label="参与标注的模型(逗号分隔;多模型互检需选 rigorous 预设)",
                         value="mock-1, mock-2, mock-3",
                         placeholder="例如: deepseek-chat, deepseek-reasoner"
                     )
@@ -247,7 +255,7 @@ class AnnotationUI:
             # ============ ⑤ 版本管理 ============
             with gr.Tab("⑤ 版本管理"):
                 gr.Markdown("### 📚 标注指南版本历史")
-                version_md = gr.Markdown("**版本历史:** 待标注后查看")
+                gr.Markdown("**版本历史:** 待标注后查看")
                 with gr.Row():
                     version_btn = gr.Button("🕘 查看版本历史", variant="secondary")
                     version_output = gr.Markdown("**版本历史:** 待查看")

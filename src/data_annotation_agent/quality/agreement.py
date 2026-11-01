@@ -3,8 +3,8 @@
 实现 Cohen's κ / Fleiss' κ / Krippendorff's α
 用于量化多个标注者(多个AI或AI与人)的标注一致性
 """
-from typing import List, Dict, Any, Optional
 from collections import Counter
+from typing import Any, Dict, List
 
 
 def cohens_kappa(labels_a: List[Any], labels_b: List[Any]) -> float:

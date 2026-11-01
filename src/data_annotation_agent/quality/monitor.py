@@ -3,7 +3,8 @@
 实时监控标注质量,达到阈值时提示停止
 提供预设(保守/平衡/宽松/手动)
 """
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from data_annotation_agent.core.models import MonitorPreset
 
 

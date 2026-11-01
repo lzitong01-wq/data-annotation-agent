@@ -18,21 +18,21 @@ Web 界面::
     python -m data_annotation_agent
 """
 
+from data_annotation_agent.core.exporter import EXPORTERS, export_results
 from data_annotation_agent.core.models import (
     AgentPresets,
     AnnotationConfig,
     AnnotationGuideline,
     AnnotationResult,
     DataType,
+    GoldenData,
     GoldSample,
     GoldSet,
-    GoldenData,
     Industry,
     Registry,
     ResearchObject,
     TaskType,
 )
-from data_annotation_agent.core.exporter import EXPORTERS, export_results
 from data_annotation_agent.core.pipeline import AnnotationPipeline
 from data_annotation_agent.llm.backend import LLMBackend, get_backend
 

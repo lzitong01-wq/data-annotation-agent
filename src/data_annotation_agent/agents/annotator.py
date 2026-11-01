@@ -2,10 +2,13 @@
 标注 Agent:单 AI 标注器 + 多 AI 标注器
 支持可解释性输出(标注理由)、置信度、难度分级
 """
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from data_annotation_agent.core.models import (
-    AnnotationResult, AnnotationGuideline, GoldSet, AnnotatorPreset,
-    DataType, TaskType
+    AnnotationGuideline,
+    AnnotationResult,
+    AnnotatorPreset,
+    GoldSet,
 )
 from data_annotation_agent.llm.backend import LLMBackend
 
@@ -108,7 +111,7 @@ class AnnotatorAgent:
                 labels = self._extract_labels(system_prompt)
                 if labels and len(labels) > 1 and i > 0 and random.random() < 0.3:
                     # 30% 概率选一个不同的标签
-                    others = [l for l in labels if l != label]
+                    others = [lab for lab in labels if lab != label]
                     if others:
                         label = random.choice(others)
 
@@ -134,7 +137,7 @@ class AnnotatorAgent:
             "标签", "标注理由", "理由", "类别", "实体", "文本", "内容",
             "系统", "提示", "词", "参考", "示例", "样本", "结果", "列表",
         }
-        return [l for l in labels if l not in stopwords and len(l) <= 10]
+        return [lab for lab in labels if lab not in stopwords and len(lab) <= 10]
 
     def annotate(self, data: Any, preset: AnnotatorPreset,
                  guideline: Optional[AnnotationGuideline],

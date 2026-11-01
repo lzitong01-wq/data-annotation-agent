@@ -6,9 +6,9 @@ from data_annotation_agent.core.models import (
     AgentPresets,
     AnnotationGuideline,
     AnnotatorPreset,
+    GoldenData,
     GoldSample,
     GoldSet,
-    GoldenData,
 )
 from data_annotation_agent.core.pipeline import AnnotationPipeline
 

@@ -3,9 +3,10 @@
 用 LLM 帮用户把"想法"变成"清晰规则"
 用户主导,系统辅助
 """
-from typing import List, Dict, Any, Optional
 from datetime import datetime
-from data_annotation_agent.core.models import AnnotationGuideline, ResearchObject, Industry
+from typing import Any, Dict, List
+
+from data_annotation_agent.core.models import AnnotationGuideline, Industry, ResearchObject
 from data_annotation_agent.llm.backend import LLMBackend
 
 
@@ -48,7 +49,7 @@ class GuidelineAgent:
                 label_schema=obj.label_schema or {},
                 source="drafted",
             )
-        except Exception as e:
+        except Exception:
             # 模拟模式或失败时,生成一个基础指南
             return AnnotationGuideline(
                 title=f"{obj.name}标注指南",

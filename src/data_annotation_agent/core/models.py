@@ -2,12 +2,12 @@
 核心数据模型:行业/研究对象注册、金标三集、标注指南、Agent 预设
 通用框架设计:行业/对象可扩展注册,不限于特定领域
 """
-from enum import Enum
-from typing import List, Dict, Any, Optional, Callable
-from pydantic import BaseModel, Field
-from datetime import datetime
 import uuid
+from datetime import datetime
+from enum import Enum
+from typing import Any, Dict, List, Optional
 
+from pydantic import BaseModel, Field
 
 # ============ 基础枚举 ============
 

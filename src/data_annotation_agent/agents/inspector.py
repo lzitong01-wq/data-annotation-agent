@@ -2,9 +2,10 @@
 检验 Agent:一致性检验 + AI 互检
 量化标注者间一致性,暴露分歧样本
 """
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List
+
 from data_annotation_agent.core.models import AnnotationResult, InspectorPreset
-from data_annotation_agent.quality.agreement import compute_agreement, cohens_kappa, fleiss_kappa
+from data_annotation_agent.quality.agreement import compute_agreement
 
 
 class InspectorAgent:
